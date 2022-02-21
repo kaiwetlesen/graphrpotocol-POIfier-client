@@ -1,13 +1,9 @@
 FROM python:3-alpine
 
-RUN apk --no-cache add gcc musl-dev
-
-WORKDIR /usr/src/app
-
-COPY requirements.txt ./
-
-RUN pip3 install -r requirements.txt
+WORKDIR /opt/poifier
 
 COPY . .
 
-ENTRYPOINT [ "python3", "./poifier-client.py" ]
+RUN pip3 install -r requirements.txt
+
+CMD [ "/bin/sh", "/opt/poifier/run-poifier.sh" ]

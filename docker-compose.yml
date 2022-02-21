@@ -12,6 +12,9 @@ services:
     restart: unless-stopped
     tty: true
     command:
+      - '/usr/bin/env'
+      - 'python3'
+      - '/opt/poifier/poifier-client.py'
       - '--poifier-token=<POIFIER_TOKEN>'
       - '--poifier-server=POIFIER_SERVER'
       - '--ethereum-endpoint=<ETHEREUM_ENDPOINT>'
