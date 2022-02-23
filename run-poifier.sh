@@ -15,6 +15,7 @@
 # MAINNET_SUBGRAPH_ENDPOINT    : --mainnet-subgraph-endpoint
 #       [OR]
 # GRAPH_ENDPOINT + SUBGRAPH_ID : --mainnet-subgraph-endpoint="$GRAPH_ENDPOINT/$SUBGRAPH_ID"
+printenv
 
 [ -z "$POIFIER_TOKEN" ] && echo No POIFIER_TOKEN set, cannot run poifier && exit 1 ||\
 	ARGS="--poifier-token '$POIFIER_TOKEN'"
