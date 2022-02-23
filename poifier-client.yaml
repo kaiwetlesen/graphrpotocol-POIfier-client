@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: poifier-client
+spec:
+  selector:
+    matchLabels:
+      app: poifier-client
+  serviceName: poifier-client
+  replicas: 1
+  podManagementStrategy: Parallel
+  updateStrategy:
+    type: Replace
+  template:
+    spec:
+      containers:
+        - name: poifier
+          image: us.gcr.io/graph-indexer-semiotic/poifier-client
+          imagePullPolicy: Always
+          env:
+            - name: POIFIER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: poifier
+                  key: token
+            - name: ETHEREUM_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: ethereum
+                  key: url
+            - name: GRAPH_ENDPOINT
+              value: http://index-node:8000/subgraphs/id
+            - name: SUBGRAPH_ID
+              valueFrom:
+                secretKeyRef:
+                  name: network-subgraph
+                  key: deployment
+            - name: GRAPH_NODE_STATUS_ENDPOINT
+              value: http://index-node:8030/graphql
+
+      restartPolicy: Never
+  backoffLimit: 1

@@ -6,7 +6,7 @@
 # of a set of evironment variables.
 
 # Variable correspondence:
-# GRAPH_NODE_STATUS_ENDPOINT : --graph-node-status-endpoing
+# GRAPH_NODE_STATUS_ENDPOINT : --graph-node-status-endpoint
 # POIFIER_TOKEN              : --poifier-token
 # POIFIER_SERVER             : --poifier-server
 # ETHEREUM_ENDPOINT          : --ethereum-endpoint
@@ -30,6 +30,6 @@ fi
 
 [ -n "$POIFIER_SERVER" ] && ARGS="$ARGS --poifier-server $POIFIER_SERVER"
 [ -n "$ETHEREUM_ENDPOINT" ] && ARGS="$ARGS --ethereum-endpoint $ETHEREUM_ENDPOINT"
+[ -n "$GRAPH_NODE_STATUS_ENDPOINT" ] && ARGS="$ARGS --graph-node-status-endpoint $GRAPH_NODE_STATUS_ENDPOINT"
 
-echo /usr/bin/env python3 /opt/poifier/poifier-client.py $ARGS
 /usr/bin/env python3 /opt/poifier/poifier-client.py $ARGS
