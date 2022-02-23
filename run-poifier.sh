@@ -20,16 +20,16 @@
 	ARGS="--poifier-token '$POIFIER_TOKEN'"
 
 if [ -n "$GRAPH_ENDPOINT" ] && [ -n "$SUBGRAPH_ID" ]; then
-	ARGS="$ARGS --mainnet-subgraph-endpoint '$GRAPH_ENDPOINT/$SUBGRAPH_ID'"
+	ARGS="$ARGS --mainnet-subgraph-endpoint $GRAPH_ENDPOINT/$SUBGRAPH_ID"
 elif [ -z "$GRAPH_ENDPOINT" ] && [ -n "$SUBGRAPH_ID" ]; then
-	ARGS="$ARGS --mainnet-subgraph-endpoint 'http://query-node-0:8000/subgraphs/id/$SUBGRAPH_ID'"
+	ARGS="$ARGS --mainnet-subgraph-endpoint http://query-node-0:8000/subgraphs/id/$SUBGRAPH_ID"
 elif [ -n "$MAINNET_SUBGRAPH_ENDPOINT" ]; then
-	ARGS="$ARGS --mainnet-subgraph-endpoint '$MAINNET_SUBGRAPH_ENDPOINT'"
+	ARGS="$ARGS --mainnet-subgraph-endpoint $MAINNET_SUBGRAPH_ENDPOINT"
 # else let the default in poifier-client prevail
 fi
 
 [ -n "$POIFIER_SERVER" ] && ARGS="$ARGS --poifier-server $POIFIER_SERVER"
-[ -n "$ETHEREUM_ENDPOINT" ] && ARGS="$ARGS --ethereum-endpoint '$ETHEREUM_ENDPOINT'"
+[ -n "$ETHEREUM_ENDPOINT" ] && ARGS="$ARGS --ethereum-endpoint $ETHEREUM_ENDPOINT"
 
 echo /usr/bin/env python3 /opt/poifier/poifier-client.py $ARGS
-/usr/bin/env python3 /opt/poifier/poifier-client.py $ARGS
+/usr/bin/env python3 /opt/poifier/poifier-client.py "$ARGS"
