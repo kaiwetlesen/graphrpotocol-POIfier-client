@@ -8,7 +8,7 @@
 from python_graphql_client import GraphqlClient
 from string import Template
 from urllib.parse import urljoin
-import argparse
+import configargparse
 import json
 import logging
 import os
@@ -23,28 +23,33 @@ LAST_N_1K_BLOCK = 10
 SLEEP = 14400 # Run script every 4 hrs
 
 def parseArguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--graph-node-status-endpoint',
+    parser = configargparse.ArgumentParser()
+    parser.add_argument('-g', '--graph-node-status-endpoint',
+        env_var='GRAPH_NODE_STATUS_ENDPOINT',
         dest='graph_node_status_endpoint',
         help='Graph-node status endpoint, (default: %(default)s)',
         default='http://index-node-0:8030/graphql',
         type=str)
-    parser.add_argument('--poifier-token',
+    parser.add_argument('-t', '--poifier-token',
+        env_var='POIFIER_TOKEN',
         dest='poifier_token',
         help='Auth token, request token via POIfier portal',
         required=True,
         type=str)
-    parser.add_argument('--poifier-server',
+    parser.add_argument('-s', '--poifier-server',
+        env_var='POIFIER_SERVER',
         dest='poifier_server',
         help='URL of POIfier server (default: %(default)s)',
         default='https://poifier.io',
         type=str)
-    parser.add_argument('--mainnet-subgraph-endpoint',
+    parser.add_argument('-m', '--mainnet-subgraph-endpoint',
+        env_var='MAINNET_SUBGRAPH_ENDPOINT',
         dest='mainnet_subgraph_endpoint',
         help='Graph mainnet network endpoint (default: %(default)s)',
         default='https://gateway.network.thegraph.com/network',
         type=str)
-    parser.add_argument('--ethereum-endpoint',
+    parser.add_argument('-e', '--ethereum-endpoint',
+        env_var='ETHEREUM_ENDPOINT',
         dest='ethereum_endpoint',
         help='Ethereum endpoint to get block hash (default: %(default)s)',
         default='https://eth-mainnet.alchemyapi.io/v2/demo',
