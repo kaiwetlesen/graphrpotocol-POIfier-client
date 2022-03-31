@@ -103,7 +103,12 @@ def getStartBlock(epoch, subgraph_endpoint):
         logging.error('Can\'t get startBlock, check query {}'.format(data))
         sys.exit()
     logging.info('Received startBlock data: {}'.format(data))
-    return data['data']['epoch']['startBlock']
+    try:
+        startBlock = data['data']['epoch']['startBlock']
+    except TypeError as e:
+        logging.error('Received nonsense from the network subgraph, check resulting data {}'.format(data))
+        sys.exit()
+    return startBlock
 
 def getBlockHash(block_number, ethereum_endpoint):
     payload = {

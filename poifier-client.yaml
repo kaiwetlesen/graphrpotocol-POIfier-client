@@ -8,10 +8,10 @@ spec:
       app: poifier-client
   serviceName: poifier-client
   replicas: 1
-  podManagementStrategy: Parallel
-  updateStrategy:
-    type: Replace
   template:
+    metadata:
+      labels:
+        app: poifier-client
     spec:
       containers:
         - name: poifier
@@ -37,6 +37,4 @@ spec:
                   key: deployment
             - name: GRAPH_NODE_STATUS_ENDPOINT
               value: http://index-node:8030/graphql
-
-      restartPolicy: Never
-  backoffLimit: 1
+      restartPolicy: Always

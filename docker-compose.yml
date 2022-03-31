@@ -5,6 +5,8 @@ networks:
     driver: bridge
 services:
   poifier-client:
+    env_file:
+      - poifier.env
     container_name: poifier-client
     image: grassets/poifier-client
     networks:
